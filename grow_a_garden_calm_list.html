@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grow a Garden - Pet Generator</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(-45deg, #a18cd1, #fbc2eb, #fad0c4, #cfd9df);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.6);
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    input {
+      width: 80%;
+      max-width: 300px;
+    }
+    button {
+      background: #a64ca6;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #732d91;
+    }
+    .pet-result {
+      margin: 20px 0;
+      padding: 10px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 5px;
+      font-size: 18px;
+    }
+    .pet-list {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      display: none;
+    }
+    .pet-list h2 {
+      margin-bottom: 10px;
+    }
+    .pet-item {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌸 Grow a Garden - Pet Generator 🌸</h1>
+  <input type="text" id="username" placeholder="Enter Roblox Username">
+  <button onclick="generatePet()">Generate Pet</button>
+
+  <div id="result" class="pet-result"></div>
+  <div id="allPets" class="pet-list">
+    <h2>Available Pets</h2>
+    <div id="petItems"></div>
+  </div>
+
+  <script>
+    const pets = [
+      "🦝 Raccoon",
+      "🦋 Butterfly",
+      "🐉 Dragonfly",
+      "🐙 Mimic",
+      "👑🐝 Queen Bee",
+      "🐻🐝 Bear Bee",
+      "🦋 Moth",
+      "🦊 Red Fox",
+      "🪩🐝 Disco Bee",
+      "🪙🦢 Golden Goose"
+    ];
+
+    function generatePet() {
+      const username = document.getElementById("username").value;
+      if (!username) {
+        document.getElementById("result").innerHTML = "<p>Please enter a Roblox username!</p>";
+        return;
+      }
+
+      // Pick random pet
+      const randomPet = pets[Math.floor(Math.random() * pets.length)];
+      document.getElementById("result").innerHTML = `<strong>${username}</strong> gets: ${randomPet}!`;
+
+      // Show all pets list
+      const petListDiv = document.getElementById("petItems");
+      petListDiv.innerHTML = "";
+      pets.forEach(pet => {
+        const div = document.createElement("div");
+        div.className = "pet-item";
+        div.textContent = pet;
+        petListDiv.appendChild(div);
+      });
+      document.getElementById("allPets").style.display = "block";
+    }
+  </script>
+</body>
+</html>
